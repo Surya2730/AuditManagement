@@ -231,7 +231,11 @@ const seedDatabase = async () => {
       },
     ];
 
-    const createdAuditors = await User.insertMany(auditorData);
+    const createdAuditors = [];
+    for (const data of auditorData) {
+      const auditor = await User.create(data);
+      createdAuditors.push(auditor);
+    }
     console.log(`👥 Created ${createdAuditors.length} auditors`);
 
     // Create sample assignments

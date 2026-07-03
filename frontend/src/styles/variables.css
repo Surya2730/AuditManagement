@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap');
+
+:root {
+  /* BIT College Portal Color System */
+  --primary-color: #003580;       /* Deep BIT Navy */
+  --primary-hover: #002b66;
+  --primary-light: #e8eef8;
+  --accent-color: #c8951a;        /* BIT Gold Accent */
+  --accent-light: #fff8e8;
+  --secondary-color: #eaf0fb;
+  --bg-color: #f0f4f8;
+  --card-bg: #ffffff;
+  --navbar-bg: #002249;           /* BIT Dark Navy */
+  --navbar-accent: #c8951a;
+  --sidebar-bg: #001e42;          /* Deep Sidebar Navy */
+  --sidebar-text: #a8c4e0;
+  --sidebar-active: #c8951a;
+  --sidebar-hover-bg: rgba(200, 149, 26, 0.12);
+  --text-color: #1a2332;
+  --text-muted: #5a6a80;
+  --border-color: #dce4f0;
+  --success-color: #16a34a;
+  --success-light: #dcfce7;
+  --warning-color: #d97706;
+  --warning-light: #fef3c7;
+  --danger-color: #dc2626;
+  --danger-light: #fee2e2;
+  --info-color: #0369a1;
+  --info-light: #e0f2fe;
+
+  /* Fonts */
+  --font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-heading: 'Poppins', 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Borders */
+  --border-radius-xs: 2px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+
+  /* Shadows — premium layered look */
+  --box-shadow-sm: 0 1px 4px rgba(0, 43, 105, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --box-shadow-md: 0 4px 16px rgba(0, 43, 105, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --box-shadow-lg: 0 8px 32px rgba(0, 43, 105, 0.12), 0 4px 8px rgba(0, 0, 0, 0.05);
+  --box-shadow-xl: 0 20px 48px rgba(0, 43, 105, 0.16);
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}

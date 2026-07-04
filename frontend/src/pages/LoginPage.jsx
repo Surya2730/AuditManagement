@@ -164,8 +164,8 @@ const LoginPage = () => {
 
           <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: '#f7f9fc', borderRadius: '4px', fontSize: '0.78rem', color: '#6c757d', border: '1px solid #dee2e6' }}>
             <strong style={{ color: '#0B5ED7' }}>Demo Credentials</strong><br />
-            Admin: <code>admin</code> / <code>password</code><br />
-            Auditor: <code>auditor</code> / <code>password</code>
+            Admin: <code>bit_admin</code> / <code>Admin@BIT2025</code><br />
+            Auditor: <code>auditor_priya</code> / <code>Auditor@BIT2</code>
           </div>
         </form>
       ) : (

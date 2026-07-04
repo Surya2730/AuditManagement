@@ -10,8 +10,12 @@ export const AuthProvider = ({ children }) => {
 
   // Configure Axios Instance (memoized so we're not recreating on every render)
   const api = useMemo(() => {
+    const rawBackendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = rawBackendUrl ? rawBackendUrl.replace(/\/+$/, '') : '';
+    const baseURL = backendUrl ? `${backendUrl}/api` : '/api';
+
     return axios.create({
-      baseURL: '/api',
+      baseURL,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -23,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const savedToken = localStorage.getItem('accessToken');
       if (savedToken) {
-        await axios.post('/api/auth/logout', {}, {
+        await api.post('/auth/logout', {}, {
           headers: { Authorization: `Bearer ${savedToken}` }
         });
       }
@@ -35,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       setToken(null);
       setUser(null);
     }
-  }, []);
+  }, [api]);
 
   // Attach interceptors once and clean up on unmount
   useEffect(() => {
@@ -63,7 +67,7 @@ export const AuthProvider = ({ children }) => {
               return Promise.reject(error);
             }
 
-            const res = await axios.post('/api/auth/refresh', { refreshToken: storedRefreshToken });
+            const res = await api.post('/auth/refresh', { refreshToken: storedRefreshToken });
             if (res.status === 200) {
               const { accessToken, refreshToken } = res.data;
               localStorage.setItem('accessToken', accessToken);

@@ -381,7 +381,7 @@ const ActiveAudit = () => {
             </span>
           </div>
           <a
-            href={`http://localhost:5000${assignment.location.fitnessCertificateUrl}`}
+            href={`https://auditmanagement.onrender.com${assignment.location.fitnessCertificateUrl}`}
             target="_blank"
             rel="noreferrer"
             style={{

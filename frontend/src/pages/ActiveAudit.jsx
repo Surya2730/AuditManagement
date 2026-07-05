@@ -81,7 +81,7 @@ const ActiveAudit = () => {
       try {
         const res = await api.get(`/assignments/${id}`);
         setAssignment(res.data);
-        
+
         // Setup coordinates simulation default
         setSimulatedCoords({
           latitude: res.data.location.latitude,
@@ -132,9 +132,9 @@ const ActiveAudit = () => {
   const handleQrSubmit = (e) => {
     e.preventDefault();
     setQrError('');
-    
+
     const expectedQr = `ROOM_VERIFY_${assignment.location.code}`;
-    
+
     if (qrInput.trim() === expectedQr) {
       setQrVerified(true);
     } else {
@@ -150,7 +150,7 @@ const ActiveAudit = () => {
 
   const handleAnswerChange = (questionId, value, remarks = '', images = null) => {
     const current = answers[questionId] || { value: '', remarks: '', images: [] };
-    
+
     setAnswers({
       ...answers,
       [questionId]: {
@@ -187,7 +187,7 @@ const ActiveAudit = () => {
     if (!files || files.length === 0) return;
 
     setUploadingImage({ ...uploadingImage, [questionId]: true });
-    
+
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append('images', files[i]);
@@ -197,7 +197,7 @@ const ActiveAudit = () => {
       const res = await api.post('/audits/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      
+
       const currentImages = answers[questionId]?.images || [];
       handleAnswerChange(questionId, null, null, [...currentImages, ...res.data.urls]);
     } catch (err) {
@@ -267,7 +267,7 @@ const ActiveAudit = () => {
       const offlineQueue = JSON.parse(localStorage.getItem('offline_audit_queue') || '[]');
       offlineQueue.push(auditPayload);
       localStorage.setItem('offline_audit_queue', JSON.stringify(offlineQueue));
-      
+
       // Update status locally
       localStorage.removeItem(`audit_draft_${id}`);
       localStorage.removeItem(`audit_visit_image_${id}`);
@@ -278,14 +278,14 @@ const ActiveAudit = () => {
 
     try {
       const res = await api.post('/audits/submit', auditPayload);
-      
+
       // Clean up Draft
       localStorage.removeItem(`audit_draft_${id}`);
       localStorage.removeItem(`audit_visit_image_${id}`);
-      
+
       // Send completed socket status update
       sendLocationUpdate(activeCoords.latitude, activeCoords.longitude, activeCoords.accuracy || 5, 'Completed', id);
-      
+
       alert(`Audit Submitted! Compliance Score: ${res.data.complianceScore}%`);
       navigate('/auditor-dashboard');
     } catch (err) {
@@ -301,7 +301,7 @@ const ActiveAudit = () => {
         if (queue.length === 0) return;
 
         console.log('Online detected. Syncing offline submissions...');
-        
+
         for (const item of queue) {
           try {
             await api.post('/audits/submit', item);
@@ -309,11 +309,11 @@ const ActiveAudit = () => {
             console.error('Failed to sync offline item', err);
           }
         }
-        
+
         localStorage.removeItem('offline_audit_queue');
         alert('All offline inspection results successfully synced to institutional portal.');
       };
-      
+
       syncOfflineQueue();
     }
   }, [isOnline]);
@@ -381,6 +381,7 @@ const ActiveAudit = () => {
             </span>
           </div>
           <a
+
             href={`https://auditmanagement.onrender.com${assignment.location.fitnessCertificateUrl}`}
             target="_blank"
             rel="noreferrer"
@@ -405,7 +406,7 @@ const ActiveAudit = () => {
           <p style={{ fontSize: '0.85rem', color: '#6c757d', marginBottom: '1.5rem' }}>
             Please scan or input the QR code verification tag affixed to the entrance of {assignment.location.name}.
           </p>
-          
+
           <form onSubmit={handleQrSubmit}>
             <div className="form-group">
               <label className="form-label">Input QR Verification Token</label>
@@ -433,7 +434,7 @@ const ActiveAudit = () => {
       ) : (
         /* ACTIVE AUDIT CONTENT */
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '1.5rem', alignItems: 'start' }}>
-          
+
           {/* CHECKLIST QUESTIONS FORM */}
           <div className="card" style={{ margin: 0 }}>
             <h3 style={{ borderBottom: '1px solid #dee2e6', paddingBottom: '0.75rem', marginBottom: '1.5rem', fontSize: '1.1rem' }}>
@@ -484,7 +485,7 @@ const ActiveAudit = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {assignment.location.checklist.map((q) => {
                 const ans = answers[q.questionId] || { value: '', remarks: '', images: [] };
-                
+
                 return (
                   <div key={q.questionId} style={{ borderBottom: '1px solid #f1f1f1', paddingBottom: '1.5rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
@@ -561,11 +562,11 @@ const ActiveAudit = () => {
                     {q.type === 'Text' && (
                       <div style={{ margin: '0.5rem 0' }}>
                         <input
-                           type="text"
-                           className="form-control"
-                           placeholder="Type answer details..."
-                           value={ans.value}
-                           onChange={(e) => handleAnswerChange(q.questionId, e.target.value)}
+                          type="text"
+                          className="form-control"
+                          placeholder="Type answer details..."
+                          value={ans.value}
+                          onChange={(e) => handleAnswerChange(q.questionId, e.target.value)}
                         />
                       </div>
                     )}
@@ -639,7 +640,7 @@ const ActiveAudit = () => {
             {/* Geofence Status Card */}
             <div className="card" style={{ margin: 0, padding: '1rem' }}>
               <h4 style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>GPS Geofence Status</h4>
-              
+
               {gpsError ? (
                 <div style={{ backgroundColor: '#fff3cd', color: '#664d03', padding: '8px', borderRadius: '3px', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <FiAlertTriangle /> {gpsError}

@@ -554,7 +554,7 @@ const AdminDashboard = () => {
                     {selectedLocation.fitnessCertificateUrl ? (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                         <a
-                          href={`http://localhost:5000${selectedLocation.fitnessCertificateUrl}`}
+                          href={`${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000').replace(/\/+$/, '')}${selectedLocation.fitnessCertificateUrl}`}
                           target="_blank" rel="noreferrer"
                           style={{ color: '#003580', fontWeight: 600, fontSize: '0.85rem', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: 5 }}
                         >

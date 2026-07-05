@@ -32,7 +32,8 @@ export const SocketProvider = ({ children }) => {
       socketRef.current = null;
     }
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+    const rawBackendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = rawBackendUrl ? rawBackendUrl.replace(/\/+$/, '') : 'http://localhost:5000';
     const socketConnection = io(backendUrl, {
       transports: ['websocket', 'polling'],
       reconnectionAttempts: Infinity,

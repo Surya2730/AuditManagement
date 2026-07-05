@@ -174,8 +174,8 @@ const AdminDashboard = () => {
   }).filter(Boolean);
 
   // Assignment category lists
-  const pendingAssignments   = assignments.filter(a => a.status === 'Pending');
-  const inProgressAssignments= assignments.filter(a => a.status === 'In Progress');
+  const pendingAssignments = assignments.filter(a => a.status === 'Pending');
+  const inProgressAssignments = assignments.filter(a => a.status === 'In Progress');
   const submittedAssignments = assignments.filter(a => a.status === 'Submitted');
   const completedAssignments = assignments.filter(a => ['Approved', 'Rejected'].includes(a.status));
 
@@ -270,10 +270,10 @@ const AdminDashboard = () => {
       {/* ── TAB NAVIGATION ── */}
       <div className="tab-group">
         {[
-          { key: 'overview',   label: 'Overview & Map',     icon: <FiMapPin /> },
-          { key: 'assignments',label: 'Audit Assignments',  icon: <FiCheckSquare /> },
-          { key: 'locations',  label: 'Campus Locations',   icon: <FiList /> },
-          { key: 'analytics',  label: 'Analytics',          icon: <FiActivity /> },
+          { key: 'overview', label: 'Overview & Map', icon: <FiMapPin /> },
+          { key: 'assignments', label: 'Audit Assignments', icon: <FiCheckSquare /> },
+          { key: 'locations', label: 'Campus Locations', icon: <FiList /> },
+          { key: 'analytics', label: 'Analytics', icon: <FiActivity /> },
         ].map(t => (
           <button
             key={t.key}
@@ -447,13 +447,12 @@ const AdminDashboard = () => {
                       {new Date(a.dueDate).toLocaleDateString('en-IN')}
                     </td>
                     <td>
-                      <span className={`badge ${
-                        a.status === 'Approved' ? 'badge-success' :
-                        a.status === 'Submitted' ? 'badge-primary' :
-                        a.status === 'In Progress' ? 'badge-info' :
-                        a.status === 'Pending' ? 'badge-warning' :
-                        'badge-danger'
-                      }`}>{a.status}</span>
+                      <span className={`badge ${a.status === 'Approved' ? 'badge-success' :
+                          a.status === 'Submitted' ? 'badge-primary' :
+                            a.status === 'In Progress' ? 'badge-info' :
+                              a.status === 'Pending' ? 'badge-warning' :
+                                'badge-danger'
+                        }`}>{a.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -554,7 +553,8 @@ const AdminDashboard = () => {
                     {selectedLocation.fitnessCertificateUrl ? (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                         <a
-                          href={selectedLocation.fitnessCertificateUrl}
+
+                          href={`${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000').replace(/\/+$/, '')}${selectedLocation.fitnessCertificateUrl}`}
                           target="_blank" rel="noreferrer"
                           style={{ color: '#003580', fontWeight: 600, fontSize: '0.85rem', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: 5 }}
                         >
